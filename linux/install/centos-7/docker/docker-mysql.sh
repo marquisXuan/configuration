@@ -62,7 +62,8 @@ echo -e "\033[32m 创建容器 $DOCKER_CONTAINER_NAME \033[0m"
 # 创建容器
 docker run \
     --network $DOCKER_NETWORK_BRIDGE_NAME \
-    -v $MYSQL_LOGS:/logs -v /etc/localtime:/etc/localtime:ro \
+    -v $MYSQL_LOGS:/logs \
+    -v /etc/localtime:/etc/localtime:ro \
     -p $MYSQL_PORT:3306 \
     -v $MYSQL_DATA:/var/lib/mysql \
     -v $MYSQL_CONF:/etc/mysql/conf.d/ \

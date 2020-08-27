@@ -9,6 +9,7 @@ docker
             ├── README.md
             ├── docker-mysql.sh
             ├── docker-nginx.sh
+            ├── docker-spring-boot.sh
             └── docker.sh
 ```
 
@@ -42,3 +43,29 @@ docker
 
 - root
 - Docker-mysql-123456
+
+## docker-spring-boot.sh
+
+> 基于 Docker 的 SpringBoot 容器
+>
+> 日志路径可设置为 **/var/logs/java** 下，容器与宿主机已做好映射
+
+### 使用方式
+
+此脚本接收三个参数
+
+#### 正常命令
+
+```shell
+java -jar -Dspring.profiles.active=环境 路径A/a.jar
+```
+
+#### 脚本命令
+
+```shell
+./docker-spring-boot.sh 路径A/a.jar 容器名称 环境名称
+# ex:
+./docker-spring-boot.sh /srv/docker/java/demo/a-demo-jar.jar a-demo test
+# 则会启动一个名叫 a-demo 的容器
+```
+
