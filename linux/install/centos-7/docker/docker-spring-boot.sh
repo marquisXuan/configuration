@@ -33,7 +33,7 @@ if [ -n "$_path" ]; then
         -v $_path:/opt/app.jar \
         -v /var/logs/java:/var/logs/java \
         --name $_container_name \
-        -e JAVA_OPTS=-Dspring.profiles.active=$env \
+        -e JAVA_OPTS=-Dspring.profiles.active=$_env \
         --restart=always \
         -d $DOCKER_IMAGES
 else
