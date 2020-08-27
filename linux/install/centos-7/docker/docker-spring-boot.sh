@@ -9,7 +9,7 @@ DOCKER_IMAGES=$(docker images | grep spring-boot-images | awk '{print $1}')
 if [ -z "$DOCKER_IMAGES" ]; then
     __path=/srv/docker/java/base
     mkdir -p $__path && cd $__path
-    echo "RlJPTSBvcGVuamRrOjgKRU5WIEpBVkFfT1BUSU9OUz0iIgpFTlRSWVBPSU5UIFsgInNoIiwgIi1jIiwgImphdmEgJEpBVkFfT1BUUyAtRGphdmEuc2VjdXJpdHkuZWdkPWZpbGU6L2Rldi8uL3VyYW5kb20gLWphciAvb3B0L2FwcC5qYXIiIF0K" | base64 -d >$__path/DockerFile
+    echo "RlJPTSBvcGVuamRrOjgKRU5WIEpBVkFfT1BUSU9OUz0iIgpFTlRSWVBPSU5UIFsgInNoIiwgIi1jIiwgImphdmEgJEpBVkFfT1BUUyAtRGphdmEuc2VjdXJpdHkuZWdkPWZpbGU6L2Rldi8uL3VyYW5kb20gLWphciAvb3B0L2FwcC5qYXIiIF0K" | base64 -d >$__path/Dockerfile
     DOCKER_IMAGES=spring-boot-images
     docker build -t $DOCKER_IMAGES .
 fi
