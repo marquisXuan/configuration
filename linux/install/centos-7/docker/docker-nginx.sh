@@ -50,7 +50,7 @@ CHECK_CONTAINER_NAME=$(docker ps --format='{{.Names}}' | grep $DOCKER_CONTAINER_
 echo -e "\033[33m 判断是否有同名容器: $CHECK_CONTAINER_NAME \033[0m"
 
 if [ -z "$CHECK_CONTAINER_NAME" ]; then
-    echo "创建容器 $DOCKER_CONTAINER_NAME \033[0m"
+    echo "\033[33m 创建容器 $DOCKER_CONTAINER_NAME \033[0m"
     # 创建容器
     docker run \
         --name $DOCKER_CONTAINER_NAME \
