@@ -25,6 +25,8 @@ fi
 DOCKER_NETWORK_BRIDGE_NAME=nginx-network
 
 if [ -n "$_path" ]; then
+    echo -e "\033[36m 创建容器 \033[0m"
+    docker rm -f $_container_name
     docker run \
         --network $DOCKER_NETWORK_BRIDGE_NAME \
         -v /etc/localtime:/etc/localtime:ro \
@@ -34,6 +36,6 @@ if [ -n "$_path" ]; then
         -e JAVA_OPTS=-Dspring.profiles.active=$env \
         --restart=always \
         -d $DOCKER_IMAGES
+else
+    echo -e "\033[36m 无参时,只创建 SpringBoot 镜像 \033[0m"
 fi
-
-echo -e "\033[36m 无参时,只创建 SpringBoot 镜像 \033[0m"
