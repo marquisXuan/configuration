@@ -14,7 +14,7 @@ if [ -z "$DOCKER_IMAGES" ]; then
 
     INNER_DOCKER_IMAGES=$(docker images | grep $DOCKER_CONTAINER_NAME | awk '{print $1}')
 
-    while (("$INNER_DOCKER_IMAGES" != "$DOCKER_CONTAINER_NAME")); do
+    while [ "$INNER_DOCKER_IMAGES" != "$DOCKER_CONTAINER_NAME" ]; do
         docker pull openjdk:8
         INNER_DOCKER_IMAGES=$(docker images | grep $DOCKER_CONTAINER_NAME | awk '{print $1}')
     done
@@ -27,9 +27,7 @@ DOCKER_NETWORK_BRIDGE_NAME=nginx-network
 if [ -n "$_path" ]; then
     echo -e "\033[36m 创建容器 \033[0m"
     docker rm -f $_container_name
-    docker run \
-        --network $DOCKER_NETWORK_BRIDGE_NAME \
-        -v /etc/localtime:/etc/localtime:ro \
+    docker run --network $DOCKER_NETWORK_BRIDGE_NAME -v /etc/localtime:/etc/localtime:ro \
         -v $_path:/opt/app.jar \
         -v /var/logs/java:/var/logs/java \
         --name $_container_name \
