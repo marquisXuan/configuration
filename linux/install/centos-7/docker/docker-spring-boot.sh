@@ -37,3 +37,5 @@ if [ -n "$_path" ]; then
 else
     echo -e "\033[36m 无参时,只创建 SpringBoot 镜像 \033[0m"
 fi
+
+docker logs -f $_container_name
