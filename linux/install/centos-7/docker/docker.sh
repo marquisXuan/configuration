@@ -1,14 +1,26 @@
 #!/bin/bash
 
-# docker组 todo 检查用户组是否存在
-groupadd docker -g 7654
+groupDocker=$(cat /etc/group | grep docker | wc -l | awk '{print $0}')
 
-# 安装 docker 检查 docker 是否已经安装
-yum -y install docker
+if test $groupDocker -eq 0 ; then
+  # docker组 todo 检查用户组是否存在
+  groupadd docker -g 7654
+else
+  echo "\033[33m docker 组已存在 \033[33m"  
+fi
+
+dockerInstalled=$(yum list installed | grep docker | wc -l | awk '{print $0}')
+
+if test $dockerInstalled -eq 0 ; then 
+  # 安装 docker 检查 docker 是否已经安装
+  yum -y install docker
+else
+  echo "\033[33m 已安装 Docker \033[33m"
+fi
 
 # 修改 docker 软件源
-echo "ewoJInJlZ2lzdHJ5LW1pcnJvcnMiOgoJCVsKCQkJImh0dHA6Ly9mMmQ2Y2I0MC5tLmRhb2Nsb3VkLmlvIgoJCQksImh0dHA6Ly9odWItbWlycm9yLmMuMTYzLmNvbSIKCQkJLCJodHRwczovL2RvY2tlci5taXJyb3JzLnVzdGMuZWR1LmNuIgoJCQksImh0dHBzOi8vcmVnaXN0cnkuZG9ja2VyLWNuLmNvbSIKCQldCn0K" | base64 >/etc/docker/daemon.json
-
+echo "ewoJInJlZ2lzdHJ5LW1pcnJvcnMiOgoJCVsKCQkJImh0dHA6Ly9mMmQ2Y2I0MC5tLmRhb2Nsb3VkLmlvIgoJCQksImh0dHA6Ly9odWItbWlycm9yLmMuMTYzLmNvbSIKCQkJLCJodHRwczovL2RvY2tlci5taXJyb3JzLnVzdGMuZWR1LmNuIgoJCQksImh0dHBzOi8vcmVnaXN0cnkuZG9ja2VyLWNuLmNvbSIKCQldCn0K" | base64 -d >/etc/docker/daemon.json
+      
 systemctl enable docker && systemctl start docker
 
 # #################### docker 容器安装 ####################
