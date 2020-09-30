@@ -66,3 +66,5 @@ if [ -z "$CHECK_CONTAINER_NAME" ]; then
         -v /etc/localtime:/etc/localtime:ro \
         --restart=always -d $DOCKER_CONTAINER_NAME:$DOCKER_CONTAINER_VERSION
 fi
+
+docker ps --format='{{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}'

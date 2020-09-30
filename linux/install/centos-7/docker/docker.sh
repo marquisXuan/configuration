@@ -43,11 +43,11 @@ fi
 
 # 网桥创建成功,可以创建容器了
 if [ -f "$PWD/docker-nginx.sh" ]; then
-    echo -e "\033[33m  创建 nginx 容器 \033[0m"
+    echo -e "\033[33m 创建 nginx 容器 \033[0m"
     $($PWD/docker-nginx.sh)
 fi
 
 if [ -f "$PWD/docker-mysql.sh" ]; then
-    echo -e "\033[32m  创建 mysql 容器 \033[0m"
+    echo -e "\033[33m 创建 mysql 容器 \033[0m"
     $($PWD/docker-mysql.sh)
 fi
