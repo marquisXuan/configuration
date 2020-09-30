@@ -15,6 +15,7 @@ systemctl enable docker && systemctl start docker
 
 # 网桥配置 定义一个 docker 网桥,名称为 nginx-network
 DOCKER_NETWORK_BRIDGE_NAME=nginx-network
+
 DOCKER_NETWORK_BRIDGE=$(docker network ls --filter=name=$DOCKER_NETWORK_BRIDGE_NAME | sed -n '2 ,1p' | awk '{print $2}')
 if [ -z "$DOCKER_NETWORK_BRIDGE" ]; then
     echo -e "\033[33m  创建 docker 网桥:[$DOCKER_NETWORK_BRIDGE_NAME] \033[0m"
